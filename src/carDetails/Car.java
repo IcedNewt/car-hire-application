@@ -1,6 +1,8 @@
 package carDetails;
 
 public interface Car {
+	//This is my second commit !
+	
 	String getRegNumber(); 
 	
 	int getMaxFuel(); // Maximum capacity of the fuel tank.
