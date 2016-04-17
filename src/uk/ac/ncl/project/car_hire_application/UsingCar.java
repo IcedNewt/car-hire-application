@@ -3,9 +3,9 @@ package uk.ac.ncl.project.car_hire_application;
 public class UsingCar {
 	
 	public static void main(String[] args) {
-		Car carA = new LargeCar("a","123");
-		Car carB;carB = new SmallCar("a","123");
-		Car carC = new LargeCar("a","124");
+		Car carA = new LargeCar();
+		Car carB;carB = new SmallCar();
+		Car carC = new LargeCar();
 		
 		System.out.println(carA.getCAR_REGISTRATION());
 		System.out.println(carA.driveCar(3000));

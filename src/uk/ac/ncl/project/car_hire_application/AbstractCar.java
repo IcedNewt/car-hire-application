@@ -8,17 +8,17 @@ public abstract class AbstractCar implements Car{
 	private boolean rented;
 	
 	
-	AbstractCar(String firstComponent, String secondComponent,int maxFuel){
-		this.CAR_REGISTRATION = createCarRegistration(firstComponent,secondComponent);
+	AbstractCar(int maxFuel){
+		this.CAR_REGISTRATION = createCarRegistration();
 		this.MAX_FUEL = maxFuel;
 		this.currentFuel = maxFuel;
 		this.rented = false;
 	}
 	
-	private String createCarRegistration(String firstComponent, String secondComponent){
+	private String createCarRegistration(){
 		String temp;
 		try{
-			temp = CarRegistration.getInstance(firstComponent,secondComponent).getREGISTRATION_NUMBER();
+			temp = CarRegistration.getInstance().getREGISTRATION_NUMBER();
 		}catch(NullPointerException n){
 			temp = null;
 		}

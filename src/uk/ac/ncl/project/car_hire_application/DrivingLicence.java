@@ -60,4 +60,5 @@ public final class DrivingLicence {
 		public boolean getIsFullLicence(){
 			return IS_FULL_LICENCE;
 		}
+		
 }

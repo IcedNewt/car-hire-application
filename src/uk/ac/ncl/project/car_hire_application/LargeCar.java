@@ -2,8 +2,8 @@ package uk.ac.ncl.project.car_hire_application;
 
 public class LargeCar extends AbstractCar {
 	
-	LargeCar(String firstComponent, String secondComponent){
-		super(firstComponent,secondComponent,65);
+	LargeCar(){
+		super(65);
 	}	
 	
 	public int driveCar(int kilometers){

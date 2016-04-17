@@ -4,22 +4,27 @@ import java.util.*;
 
 public final class CarRegistration {
 		
-	private final String FIRSTCOMPONENT;
+	private final char FIRSTCOMPONENT;
 	private final String SECONDCOMPONENT;
 	private final String REGISTRATION_NUMBER;
-	private final static Map<String, CarRegistration> registrationNumbers = new HashMap<String, CarRegistration>();
+	private final static Map<String, CarRegistration> REGISTRATION_NUMBERS = new HashMap<String, CarRegistration>();
 	
-	private CarRegistration(String firstComponent, String secondComponent,String registrationNumber){
+	private CarRegistration(char firstComponent, String secondComponent,String registrationNumber){
 		this.FIRSTCOMPONENT = firstComponent;
 		this.SECONDCOMPONENT = secondComponent;
 		this.REGISTRATION_NUMBER = registrationNumber;
 	}
 	
-	public static CarRegistration getInstance(String firstComponent, String secondComponent){
+	public static CarRegistration getInstance(){
+		String alphabet= "abcdefghijklmnopqrstuvwxyz";
+		char firstComponent = alphabet.charAt((int)(Math.random()*26));
+		String secondComponent = "";
+		for(int i = 0; i < 3;i++){
+		secondComponent += String.valueOf((int)(Math.random()*9)+1);}
 		final String K = firstComponent+secondComponent;
-		if(!registrationNumbers.containsKey(K)){
-			registrationNumbers.put(K, new CarRegistration(firstComponent,secondComponent,K));	
-			return registrationNumbers.get(K);
+		if(!REGISTRATION_NUMBERS.containsKey(K)){
+			REGISTRATION_NUMBERS.put(K, new CarRegistration(firstComponent,secondComponent,K));	
+			return REGISTRATION_NUMBERS.get(K);
 		}
 		else{
 			return null;
@@ -28,12 +33,16 @@ public final class CarRegistration {
 	}
 	
 	public static void getRegistrationNumbers(){
-		for (String key : registrationNumbers.keySet()) {
+		for (String key : REGISTRATION_NUMBERS.keySet()) {
 			System.out.println(key);
 		}
 	}
 
-	public String getFIRSTCOMPONENT() {
+	public static Map<String, CarRegistration> getREGISTRATION_NUMBERS(){
+		return REGISTRATION_NUMBERS;
+	}
+	
+	public char getFIRSTCOMPONENT() {
 		return FIRSTCOMPONENT;
 	}
 
