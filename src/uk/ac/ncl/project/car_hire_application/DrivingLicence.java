@@ -2,23 +2,25 @@ package uk.ac.ncl.project.car_hire_application;
 import java.util.*;
 import java.lang.*;
 
-public class DrivingLicence {
-		private final String firstName;
-		private final String lastName;
-		private final Date dateOfBirth;
-		private final Date dateOfIssue;
-		private final String licenceNumber;
+public final class DrivingLicence {
+		private final String FIRSTNAME;
+		private final String LASTNAME;
+		private final Date DATE_OF_BIRTH;
+		private final Date DATE_OF_ISSUE;
+		private final String LICENCE_NUMBER;
+		private final boolean IS_FULL_LICENCE;
 		private static final Map<String, DrivingLicence> LICENCES = new HashMap<String, DrivingLicence>();
 	
-		private DrivingLicence(String firstName, String lastName, Calendar dateOfBirth, Calendar dateOfIssue, String licenceNumber) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dateOfBirth = dateOfBirth.getTime();
-		this.dateOfIssue = dateOfIssue.getTime();
-		this.licenceNumber = licenceNumber;
+		private DrivingLicence(String firstName, String lastName, Calendar dateOfBirth, Calendar dateOfIssue, String licenceNumber, boolean isFullLicence) {
+		this.FIRSTNAME = firstName;
+		this.LASTNAME = lastName;
+		this.DATE_OF_BIRTH = dateOfBirth.getTime();
+		this.DATE_OF_ISSUE = dateOfIssue.getTime();
+		this.LICENCE_NUMBER = licenceNumber;
+		this.IS_FULL_LICENCE = isFullLicence;
 		}
 		
-		public static void createInstance(String firstName, String lastName, Calendar dateOfBirth, Calendar dateOfIssue) {
+		public static void createInstance(String firstName, String lastName, Calendar dateOfBirth, Calendar dateOfIssue, boolean isFullLicence) {
 			String yearOfIssue = String.valueOf(dateOfIssue.get(Calendar.YEAR));
 			String i;
 			
@@ -27,7 +29,7 @@ public class DrivingLicence {
 			}while(LICENCES.containsKey(i));
 			
 			String licenceNumber = String.valueOf(firstName.charAt(0)) + String.valueOf(lastName.charAt(0))+"-"+yearOfIssue+"-"+i;
-			LICENCES.put(i, new DrivingLicence(firstName, lastName, dateOfBirth, dateOfIssue, licenceNumber));
+			LICENCES.put(i, new DrivingLicence(firstName, lastName, dateOfBirth, dateOfIssue, licenceNumber,isFullLicence));
 		}
 		
 		public static void getLicences(){
@@ -42,17 +44,21 @@ public class DrivingLicence {
 			}
 		}
 		
-		public String getName() { return firstName+" "+lastName; }
+		public String getName() { return FIRSTNAME+" "+LASTNAME; }
 
 		public Date getDateOfBirth() {
-			return dateOfBirth;
+			return DATE_OF_BIRTH;
 		}
 
 		public Date getDateOfIssue() {
-			return dateOfIssue;
+			return DATE_OF_ISSUE;
 		}
 
 		public String getLicenceNumber() {
-			return licenceNumber;
+			return LICENCE_NUMBER;
+		}
+		
+		public boolean getIsFullLicence(){
+			return IS_FULL_LICENCE;
 		}
 }

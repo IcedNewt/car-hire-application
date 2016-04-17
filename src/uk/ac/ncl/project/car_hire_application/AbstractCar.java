@@ -2,20 +2,31 @@ package uk.ac.ncl.project.car_hire_application;
 
 public abstract class AbstractCar implements Car{
 	
-	private final String regNumber;
+	private final String CAR_REGISTRATION;
 	private final int maxFuel;
 	private int currentFuel;
 	private boolean rented;
 	
-	AbstractCar(String regNumber,int maxFuel){
-		this.regNumber = regNumber;
+	
+	AbstractCar(String firstComponent, String secondComponent,int maxFuel){
+		this.CAR_REGISTRATION = createCarRegistration(firstComponent,secondComponent);
 		this.maxFuel = maxFuel;
 		this.currentFuel = maxFuel;
 		this.rented = false;
 	}
-
-	public String getRegNumber(){
-		return regNumber;
+	
+	private String createCarRegistration(String firstComponent, String secondComponent){
+		String temp;
+		try{
+			temp = CarRegistration.getInstance(firstComponent,secondComponent).getREGISTRATION_NUMBER();
+		}catch(NullPointerException e){
+			temp = null;
+		}
+		return temp;
+	}
+	
+	public String getCAR_REGISTRATION(){
+		return CAR_REGISTRATION;
 	}
 	
 	public int getMaxFuel(){

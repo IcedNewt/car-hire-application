@@ -9,8 +9,8 @@ public class UsingDrivingLicence {
 		Calendar dateOfBirth = new GregorianCalendar(1996,9,7);
 		Calendar dateOfIssue = new GregorianCalendar(2013,0,31);
 		
-		DrivingLicence.createInstance("Jonah", "Robinson", dateOfBirth, dateOfIssue);
-		DrivingLicence.createInstance("James", "Bond", dateOfBirth, dateOfIssue);
+		DrivingLicence.createInstance("Jonah", "Robinson", dateOfBirth, dateOfIssue, false);
+		DrivingLicence.createInstance("James", "Bond", dateOfBirth, dateOfIssue, true);
 		
 		DrivingLicence.getLicences();
 	}
