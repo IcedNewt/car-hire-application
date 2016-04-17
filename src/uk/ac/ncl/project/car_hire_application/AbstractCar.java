@@ -3,14 +3,14 @@ package uk.ac.ncl.project.car_hire_application;
 public abstract class AbstractCar implements Car{
 	
 	private final String CAR_REGISTRATION;
-	private final int maxFuel;
+	private final int MAX_FUEL;
 	private int currentFuel;
 	private boolean rented;
 	
 	
 	AbstractCar(String firstComponent, String secondComponent,int maxFuel){
 		this.CAR_REGISTRATION = createCarRegistration(firstComponent,secondComponent);
-		this.maxFuel = maxFuel;
+		this.MAX_FUEL = maxFuel;
 		this.currentFuel = maxFuel;
 		this.rented = false;
 	}
@@ -19,7 +19,7 @@ public abstract class AbstractCar implements Car{
 		String temp;
 		try{
 			temp = CarRegistration.getInstance(firstComponent,secondComponent).getREGISTRATION_NUMBER();
-		}catch(NullPointerException e){
+		}catch(NullPointerException n){
 			temp = null;
 		}
 		return temp;
@@ -30,7 +30,7 @@ public abstract class AbstractCar implements Car{
 	}
 	
 	public int getMaxFuel(){
-		return maxFuel;
+		return MAX_FUEL;
 	}
 	
 	public int getCurrentFuel(){
