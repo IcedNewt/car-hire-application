@@ -7,6 +7,10 @@ public class UsingCar {
 		Car carB = new SmallCar("Small");
 		System.out.println(carA.driveCar(50));
 		System.out.println(carA.getCurrentFuel());
+		
+		System.out.println(carB.driveCar(2500));
+		System.out.println(carB.getCurrentFuel());
+		
 	}
 
 }
