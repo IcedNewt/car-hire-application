@@ -2,8 +2,7 @@ package carDetails;
 
 public class UsingCar {
 	
-	//Proof that I can upload for MAIN
-	//Proof that i can download and upload from LAP
+	//sync from testbranch.
 	
 	public static void main(String[] args) {
 		Car carA = new LargeCar("Large");
