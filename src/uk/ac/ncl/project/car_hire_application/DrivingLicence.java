@@ -1,6 +1,5 @@
 package uk.ac.ncl.project.car_hire_application;
 import java.util.*;
-import java.lang.*;
 
 public final class DrivingLicence {
 		private final String FIRSTNAME;
