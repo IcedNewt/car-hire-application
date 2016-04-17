@@ -1,8 +1,6 @@
-package carDetails;
+package uk.ac.ncl.project.car_hire_application;
 
 public class UsingCar {
-	
-	//sync from testbranch.
 	
 	public static void main(String[] args) {
 		Car carA = new LargeCar("Large");

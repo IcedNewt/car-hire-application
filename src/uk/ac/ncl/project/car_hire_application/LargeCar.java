@@ -1,4 +1,4 @@
-package carDetails;
+package uk.ac.ncl.project.car_hire_application;
 
 public class LargeCar extends AbstractCar {
 	
