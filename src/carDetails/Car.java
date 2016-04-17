@@ -1,7 +1,6 @@
 package carDetails;
 
 public interface Car {
-	//This is my second commit !
 	
 	String getRegNumber(); 
 	
