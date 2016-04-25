@@ -4,24 +4,67 @@ import java.util.*;
 
 public class RentalSystem {	
 	
-	Map<DrivingLicence, Car> rentedCars = new HashMap<DrivingLicence, Car>();
+	static Map<DrivingLicence, Car> rentedCars = new HashMap<DrivingLicence, Car>();
+	final static List<Car> smallCars = new ArrayList<Car>();
+	final static List<Car> largeCars = new ArrayList<Car>();
 	
-	public int availableCars(Car typeOfCar){
-		return 0;
+	public static List<Car> determineType(String typeOfCar){
+		if(typeOfCar == "Small"){
+			return smallCars;
+		}
+		else if(typeOfCar == "Large"){
+			return largeCars;
+		}
+		return null;
 	}
 	
-	public Map getRentedCars(){
+	public static String availableCars(String typeOfCar){
+		List<Car> listOfTypeOfCar = determineType(typeOfCar);
+
+		if (listOfTypeOfCar == null){
+			return "That is not a valid type of car, please choose: Small/Large";
+		}
 		
+		int numberOfAvailableCars = listOfTypeOfCar.size();
+		for (Car value : rentedCars.values()) {
+			for (int i = 0; i < listOfTypeOfCar.size(); i++) {
+				if(value.equals(listOfTypeOfCar.get(i))){
+					numberOfAvailableCars -= 1;
+				}
+			}
+		}	
+		return Integer.toString(numberOfAvailableCars);
+	}
+	
+	public Map<DrivingLicence, Car> getRentedCars(){
 		return rentedCars;
 	}
 	
-	public String getCar(DrivingLicence drivingLicence, Car typeOfCar){
-		return "null";
+	public Car getCar(DrivingLicence drivingLicence){
+		if(rentedCars.containsKey(drivingLicence)){
+			return rentedCars.get(drivingLicence);
+		}
+		return null;
 	}
 	
-	public void issueCar(DrivingLicence drivingLicence, Car typeOfCar){
-		
+	public String issueCar(DrivingLicence drivingLicence, String typeOfCar){
+		List<Car> listOfTypeOfCar = determineType(typeOfCar);
+		if(typeOfCar == "Small"){
+			Calendar dob = Calendar.getInstance();
+			dob.setTime(drivingLicence.getDateOfBirth());
+		}
+		if(!(rentedCars.containsKey(drivingLicence))){
+			for (int i = 0; i < listOfTypeOfCar.size(); i++) {
+				if(!(rentedCars.containsValue(listOfTypeOfCar.get(i)))){
+					return "You have been issued a car, its registration is: "+listOfTypeOfCar.get(i).getCAR_REGISTRATION();
+					
+				}
+			}
+		}	
+		return "A car cannot be issued to you, sorry.";
 	}
+		
+
 	
 	public void terminateRental(DrivingLicence drivingLicence){
 		
@@ -29,12 +72,11 @@ public class RentalSystem {
 	
 	public static void createCarFleet (int numberOfSmall, int numberOfLarge){
 		while(CarRegistration.getREGISTRATION_NUMBERS().size()!=numberOfSmall){
-			new SmallCar();
+			smallCars.add(new SmallCar());
 		}
 		while(CarRegistration.getREGISTRATION_NUMBERS().size()!=(numberOfSmall+numberOfLarge)){
-			new LargeCar();
+			largeCars.add(new LargeCar());
 		}
-		System.out.println(CarRegistration.getREGISTRATION_NUMBERS().size());
 	}
 	
 }

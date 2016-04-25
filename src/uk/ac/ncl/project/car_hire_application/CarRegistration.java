@@ -32,7 +32,7 @@ public final class CarRegistration {
 		
 	}
 	
-	public static void getRegistrationNumbers(){
+	public static void getRegistrationNumbersKeys(){
 		for (String key : REGISTRATION_NUMBERS.keySet()) {
 			System.out.println(key);
 		}
