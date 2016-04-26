@@ -56,6 +56,8 @@ public class RentalSystem {
 		if(!(rentedCars.containsKey(drivingLicence))){
 			for (int i = 0; i < listOfTypeOfCar.size(); i++) {
 				if(!(rentedCars.containsValue(listOfTypeOfCar.get(i)))){
+					
+					rentedCars.put(drivingLicence, listOfTypeOfCar.get(i));
 					return "You have been issued a car, its registration is: "+listOfTypeOfCar.get(i).getCAR_REGISTRATION();
 					
 				}
