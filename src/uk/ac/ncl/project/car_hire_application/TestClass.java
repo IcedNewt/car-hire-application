@@ -11,13 +11,10 @@ public class TestClass {
 		System.out.println(RentalSystem.availableCars("Large"));
 		
 		Calendar dateOfBirth = Calendar.getInstance();
-		dateOfBirth.set(1996,9,7);
+		dateOfBirth.set(1990,9,7);
 		
 		Calendar dateOfIssue = Calendar.getInstance();
-		dateOfIssue.set(2006,10,10);
-		
-		
-		
+		dateOfIssue.set(2006,10,10);		
 		
 		DrivingLicence.printLicences();
 		
