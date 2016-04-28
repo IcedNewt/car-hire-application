@@ -54,6 +54,7 @@ public class RentalSystem {
 		dateOfBirth.setTime(drivingLicence.getDateOfBirth());
 		
 		Calendar today = Calendar.getInstance();
+		today.add(Calendar.MONTH, 1); //Issue with calandar, the month created is out by one, 1 must be added to the month to make it the current time/date.
 		int userAge = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
 		if (today.get(Calendar.DAY_OF_YEAR) <= dateOfBirth.get(Calendar.DAY_OF_YEAR)){
 			userAge-=1;
@@ -66,7 +67,6 @@ public class RentalSystem {
 		if (today.get(Calendar.DAY_OF_YEAR) <= dateOfIssue.get(Calendar.DAY_OF_YEAR)){
 			licenceAge-=1;
 		}
-		
 		
 		if(typeOfCar == "Small"){
 			if((userAge < 21) || (licenceAge<1)){
@@ -92,7 +92,7 @@ public class RentalSystem {
 			if(!(rentedCars.containsValue(listOfTypeOfCar.get(i)))){
 				
 				rentedCars.put(drivingLicence, listOfTypeOfCar.get(i));
-				return "You have been issued a car, its registration is: "+listOfTypeOfCar.get(i).getCAR_REGISTRATION();
+				return drivingLicence.getLICENCE_NUMBER()+" has been issued a car, its registration is: "+listOfTypeOfCar.get(i).getCAR_REGISTRATION();
 				
 			}
 		}
@@ -104,6 +104,18 @@ public class RentalSystem {
 
 	
 	public void terminateRental(DrivingLicence drivingLicence){
+		
+	}
+	
+	public static DrivingLicence createDrivingLicence(String firstName, String lastName, int yearOfBirth, 
+	int monthOfBirth, int dayOfBirth, int yearOfIssue, int monthOfIssue, int dayOfIssue, boolean isFullLicence){
+		Calendar dateOfBirth = Calendar.getInstance();
+		dateOfBirth.set(yearOfBirth,monthOfBirth,dayOfBirth);
+		
+		Calendar dateOfIssue = Calendar.getInstance();
+		dateOfIssue.set(yearOfIssue,monthOfIssue,dayOfIssue);	
+		
+		return DrivingLicence.createInstance(firstName, lastName, dateOfBirth, dateOfIssue, isFullLicence);
 		
 	}
 	
