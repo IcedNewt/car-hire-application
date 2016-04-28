@@ -47,23 +47,58 @@ public class RentalSystem {
 		return null;
 	}
 	
-	public String issueCar(DrivingLicence drivingLicence, String typeOfCar){
+	public static String issueCar(DrivingLicence drivingLicence, String typeOfCar){
 		List<Car> listOfTypeOfCar = determineType(typeOfCar);
-		if(typeOfCar == "Small"){
-			Calendar dob = Calendar.getInstance();
-			dob.setTime(drivingLicence.getDateOfBirth());
+		
+		Calendar dateOfBirth = Calendar.getInstance();
+		dateOfBirth.setTime(drivingLicence.getDateOfBirth());
+		
+		Calendar today = Calendar.getInstance();
+		int userAge = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
+		if (today.get(Calendar.DAY_OF_YEAR) <= dateOfBirth.get(Calendar.DAY_OF_YEAR)){
+			userAge-=1;
 		}
-		if(!(rentedCars.containsKey(drivingLicence))){
-			for (int i = 0; i < listOfTypeOfCar.size(); i++) {
-				if(!(rentedCars.containsValue(listOfTypeOfCar.get(i)))){
-					
-					rentedCars.put(drivingLicence, listOfTypeOfCar.get(i));
-					return "You have been issued a car, its registration is: "+listOfTypeOfCar.get(i).getCAR_REGISTRATION();
-					
-				}
+		
+		Calendar dateOfIssue = Calendar.getInstance();
+		dateOfIssue.setTime(drivingLicence.getDateOfIssue());
+		
+		int licenceAge = today.get(Calendar.YEAR) - dateOfIssue.get(Calendar.YEAR);
+		if (today.get(Calendar.DAY_OF_YEAR) <= dateOfIssue.get(Calendar.DAY_OF_YEAR)){
+			licenceAge-=1;
+		}
+		
+		
+		if(typeOfCar == "Small"){
+			if((userAge < 21) || (licenceAge<1)){
+				return "A car cannot be issued to you, sorry.";
 			}
+		}
+		
+		if(typeOfCar == "Large"){
+			if((licenceAge < 25) || (licenceAge<5)){
+				return "A car cannot be issued to you, sorry.";
+			}
+		}
+		
+		if(drivingLicence.getIsFullLicence()==false){
+			return "A car cannot be issued to you, sorry.";
+		}
+		
+		if(rentedCars.containsKey(drivingLicence)){
+			return "A car cannot be issued to you, sorry.";
 		}	
-		return "A car cannot be issued to you, sorry.";
+		
+		for (int i = 0; i < listOfTypeOfCar.size(); i++) {
+			if(!(rentedCars.containsValue(listOfTypeOfCar.get(i)))){
+				
+				rentedCars.put(drivingLicence, listOfTypeOfCar.get(i));
+				return "You have been issued a car, its registration is: "+listOfTypeOfCar.get(i).getCAR_REGISTRATION();
+				
+			}
+		}
+		
+		return "Null";
+		
 	}
 		
 

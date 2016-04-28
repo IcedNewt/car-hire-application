@@ -19,7 +19,7 @@ public final class DrivingLicence {
 		this.IS_FULL_LICENCE = isFullLicence;
 		}
 		
-		public static void createInstance(String firstName, String lastName, Calendar dateOfBirth, Calendar dateOfIssue, boolean isFullLicence) {
+		public static DrivingLicence createInstance(String firstName, String lastName, Calendar dateOfBirth, Calendar dateOfIssue, boolean isFullLicence) {
 			String yearOfIssue = String.valueOf(dateOfIssue.get(Calendar.YEAR));
 			String i;
 			
@@ -28,10 +28,13 @@ public final class DrivingLicence {
 			}while(LICENCES.containsKey(i));
 			
 			String licenceNumber = String.valueOf(firstName.charAt(0)) + String.valueOf(lastName.charAt(0))+"-"+yearOfIssue+"-"+i;
-			LICENCES.put(i, new DrivingLicence(firstName, lastName, dateOfBirth, dateOfIssue, licenceNumber,isFullLicence));
+			DrivingLicence newLicence = new DrivingLicence(firstName, lastName, dateOfBirth, dateOfIssue, licenceNumber,isFullLicence);
+			LICENCES.put(i, newLicence);
+			
+			return newLicence;
 		}
 		
-		public static void getLicences(){
+		public static void printLicences(){
 			for (String key : LICENCES.keySet()) {
 				System.out.println(key);
 			}
@@ -43,12 +46,20 @@ public final class DrivingLicence {
 			}
 		}
 		
+		public String getLICENCE_NUMBER() {
+			return LICENCE_NUMBER;
+		}
+
 		public String getName() { return FIRSTNAME+" "+LASTNAME; }
 
 		public Date getDateOfBirth() {
 			return DATE_OF_BIRTH;
 		}
 
+		public static Map<String, DrivingLicence> getLICENCES(){
+			return LICENCES;
+		}
+		
 		public Date getDateOfIssue() {
 			return DATE_OF_ISSUE;
 		}
