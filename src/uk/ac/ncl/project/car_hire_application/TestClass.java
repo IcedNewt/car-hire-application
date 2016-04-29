@@ -30,7 +30,8 @@ public class TestClass {
 		
 		output(formatCollection(RentalSystem.rentedCars.toString()));
 		
-
+		bla bla
+		
 		RentalSystem.attemptToDrive(licence1,1500);
 		RentalSystem.attemptToDrive(licence1,1500);
 		RentalSystem.terminateRental(licence1);
