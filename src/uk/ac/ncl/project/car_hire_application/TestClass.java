@@ -2,7 +2,7 @@ package uk.ac.ncl.project.car_hire_application;
 
 public class TestClass {
 	
-	// Formats any collection, so that it will display better when output;  a
+	// Formats any collection, so that it will display better when output;
 	public static String formatCollection(String collectionString){
 		return collectionString.replace(", ", "").replace("[", "").replace("]", "").replace("{", "").replace("}", "").replace("=", " = ");
 	}
