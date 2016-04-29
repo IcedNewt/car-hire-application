@@ -41,6 +41,10 @@ public abstract class AbstractCar implements Car{
 		this.currentFuel = currentFuel;
 	}
 	
+	public void setRented(boolean rented){
+		this.rented = rented;
+	}
+	
 	public boolean getRented(){
 		return rented;
 	}
@@ -55,6 +59,17 @@ public abstract class AbstractCar implements Car{
 		}
 	}
 
+	public String toString(){
+		String typeOfCar;
+		if(MAX_FUEL == 65){
+			typeOfCar = "Large";
+		}
+		else{
+			typeOfCar = "Small";
+		}
+		return "Registration: "+getCAR_REGISTRATION()+" - Car Type: "+typeOfCar+" - Current Fuel: "+getCurrentFuel()+" - Is Rented? "+getRented()+System.lineSeparator();
+	}
+	
 	public void isCarRented() {
 		if(getRented() == true ){
 			System.out.println("The car is currently being rented.");

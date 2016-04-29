@@ -2,7 +2,7 @@ package uk.ac.ncl.project.car_hire_application;
 
 public class SmallCar extends AbstractCar{
 	
-	SmallCar(String carRegistration){
+	private SmallCar(String carRegistration){
 		super(45,carRegistration);
 	}	
 	

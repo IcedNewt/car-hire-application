@@ -14,5 +14,7 @@ public interface Car {
 	void isCarRented(); // True = car is rented out.
 
 	String getCAR_REGISTRATION();
+
+	void setRented(boolean b);
 	
 }

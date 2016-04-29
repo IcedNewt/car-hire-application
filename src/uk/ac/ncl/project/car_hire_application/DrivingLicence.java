@@ -34,6 +34,11 @@ public final class DrivingLicence {
 			return newLicence;
 		}
 		
+		public String toString(){
+			return "Name: "+FIRSTNAME+" "+LASTNAME+" - Licence Number: "+LICENCE_NUMBER;
+			
+		}
+		
 		public static void printLicences(){
 			for (String key : LICENCES.keySet()) {
 				System.out.println(key);

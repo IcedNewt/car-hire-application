@@ -33,7 +33,7 @@ public class RentalSystem {
 				}
 			}
 		}	
-		return Integer.toString(numberOfAvailableCars);
+		return "Number of cars of type: "+typeOfCar+" = "+Integer.toString(numberOfAvailableCars)+System.lineSeparator();
 	}
 	
 	public Map<DrivingLicence, Car> getRentedCars(){
@@ -49,6 +49,8 @@ public class RentalSystem {
 	
 	public static String issueCar(DrivingLicence drivingLicence, String typeOfCar){
 		List<Car> listOfTypeOfCar = determineType(typeOfCar);
+		
+		String invalid = drivingLicence+" = CANNOT BE ISSUED A CAR "+System.lineSeparator();
 		
 		Calendar dateOfBirth = Calendar.getInstance();
 		dateOfBirth.setTime(drivingLicence.getDateOfBirth());
@@ -70,38 +72,37 @@ public class RentalSystem {
 		
 		if(typeOfCar == "Small"){
 			if((userAge < 21) || (licenceAge<1)){
-				return "A car cannot be issued to you, sorry.";
+				return invalid;
 			}
 		}
 		
 		if(typeOfCar == "Large"){
 			if((licenceAge < 25) || (licenceAge<5)){
-				return "A car cannot be issued to you, sorry.";
+				return invalid;
 			}
 		}
 		
 		if(drivingLicence.getIsFullLicence()==false){
-			return "A car cannot be issued to you, sorry.";
+			return invalid;
 		}
 		
 		if(rentedCars.containsKey(drivingLicence)){
-			return "A car cannot be issued to you, sorry.";
+			return invalid;
 		}	
 		
 		for (int i = 0; i < listOfTypeOfCar.size(); i++) {
 			if(!(rentedCars.containsValue(listOfTypeOfCar.get(i)))){
 				
 				rentedCars.put(drivingLicence, listOfTypeOfCar.get(i));
-				return drivingLicence.getLICENCE_NUMBER()+" has been issued a car, its registration is: "+listOfTypeOfCar.get(i).getCAR_REGISTRATION();
+				listOfTypeOfCar.get(i).setRented(true);
+				return drivingLicence+" = HAS BEEN ISSUED A CAR = "+listOfTypeOfCar.get(i);
 				
 			}
 		}
 		
 		return "Null";
 		
-	}
-		
-
+	}	
 	
 	public void terminateRental(DrivingLicence drivingLicence){
 		
@@ -121,10 +122,14 @@ public class RentalSystem {
 	
 	public static void createCarFleet (int numberOfSmall, int numberOfLarge){
 		while(CarRegistration.getREGISTRATION_NUMBERS().size()!=numberOfSmall){
-			smallCars.add(SmallCar.createSmallCar());
+			Car temp = SmallCar.createSmallCar();
+			if (temp != null){
+			smallCars.add(temp);}
 		}
 		while(CarRegistration.getREGISTRATION_NUMBERS().size()!=(numberOfSmall+numberOfLarge)){
-			largeCars.add(LargeCar.createLargeCar());
+			Car temp = LargeCar.createLargeCar();
+			if (temp != null){
+			largeCars.add(temp);}
 		}
 	}
 	
