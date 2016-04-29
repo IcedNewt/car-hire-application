@@ -9,8 +9,10 @@ public class TestClass {
 		System.out.println(RentalSystem.availableCars("Large"));	
 		
 		DrivingLicence licence1 = RentalSystem.createDrivingLicence("Jonah", "Robinson", 1990, 9, 7, 2015, 4, 28, true);
+		DrivingLicence licence2 = RentalSystem.createDrivingLicence("Jonah", "Robinson", 1990, 9, 7, 2015, 4, 28, true);
 		
 		System.out.println(RentalSystem.issueCar(licence1,"Small"));
+		System.out.println(RentalSystem.issueCar(licence2,"Small"));
 		
 	}
 }

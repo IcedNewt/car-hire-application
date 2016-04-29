@@ -121,10 +121,10 @@ public class RentalSystem {
 	
 	public static void createCarFleet (int numberOfSmall, int numberOfLarge){
 		while(CarRegistration.getREGISTRATION_NUMBERS().size()!=numberOfSmall){
-			smallCars.add(new SmallCar());
+			smallCars.add(SmallCar.createSmallCar());
 		}
 		while(CarRegistration.getREGISTRATION_NUMBERS().size()!=(numberOfSmall+numberOfLarge)){
-			largeCars.add(new LargeCar());
+			largeCars.add(LargeCar.createLargeCar());
 		}
 	}
 	

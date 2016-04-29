@@ -8,14 +8,14 @@ public abstract class AbstractCar implements Car{
 	private boolean rented;
 	
 	
-	AbstractCar(int maxFuel){
-		this.CAR_REGISTRATION = createCarRegistration();
+	protected AbstractCar(int maxFuel, String carRegistration){
+		this.CAR_REGISTRATION = carRegistration;
 		this.MAX_FUEL = maxFuel;
 		this.currentFuel = maxFuel;
 		this.rented = false;
 	}
 	
-	private String createCarRegistration(){
+	protected static String createCarRegistration(){
 		String temp;
 		try{
 			temp = CarRegistration.getInstance().getREGISTRATION_NUMBER();

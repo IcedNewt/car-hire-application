@@ -2,8 +2,16 @@ package uk.ac.ncl.project.car_hire_application;
 
 public class LargeCar extends AbstractCar {
 	
-	LargeCar(){
-		super(65);
+	LargeCar(String carRegistration){
+		super(65,carRegistration);
+	}	
+	
+	public static AbstractCar createLargeCar(){
+		String carRegistration = createCarRegistration();
+		if(carRegistration != null){
+			return new LargeCar(carRegistration);
+		}
+		return null;
 	}	
 	
 	public int driveCar(int kilometers){
