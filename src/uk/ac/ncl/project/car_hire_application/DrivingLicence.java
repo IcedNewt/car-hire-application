@@ -19,7 +19,7 @@ public final class DrivingLicence {
 		this.IS_FULL_LICENCE = isFullLicence;
 		}
 		
-		public static DrivingLicence createInstance(String firstName, String lastName, Calendar dateOfBirth, Calendar dateOfIssue, boolean isFullLicence) {
+		public final static DrivingLicence createInstance(String firstName, String lastName, Calendar dateOfBirth, Calendar dateOfIssue, boolean isFullLicence) {
 			String yearOfIssue = String.valueOf(dateOfIssue.get(Calendar.YEAR));
 			String i;
 			
@@ -37,18 +37,6 @@ public final class DrivingLicence {
 		public String toString(){
 			return "Name: "+FIRSTNAME+" "+LASTNAME+" - Licence Number: "+LICENCE_NUMBER;
 			
-		}
-		
-		public static void printLicences(){
-			for (String key : LICENCES.keySet()) {
-				System.out.println(key);
-			}
-			for (DrivingLicence value : LICENCES.values()) {
-				System.out.println(value.getName());
-				System.out.println(value.getDateOfBirth());
-				System.out.println(value.getDateOfIssue());
-				System.out.println(value.getLicenceNumber());
-			}
 		}
 		
 		public String getLICENCE_NUMBER() {

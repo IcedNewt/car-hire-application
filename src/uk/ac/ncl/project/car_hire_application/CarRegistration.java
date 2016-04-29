@@ -15,7 +15,7 @@ public final class CarRegistration {
 		this.REGISTRATION_NUMBER = registrationNumber;
 	}
 	
-	public static CarRegistration getInstance(){
+	protected final static CarRegistration getInstance(){
 		String alphabet= "abcdefghijklmnopqrstuvwxyz";
 		char firstComponent = alphabet.charAt((int)(Math.random()*26));
 		String secondComponent = "";
@@ -30,12 +30,6 @@ public final class CarRegistration {
 			return null;
 		}
 		
-	}
-	
-	public static void getRegistrationNumbersKeys(){
-		for (String key : REGISTRATION_NUMBERS.keySet()) {
-			System.out.println(key);
-		}
 	}
 
 	public static Map<String, CarRegistration> getREGISTRATION_NUMBERS(){

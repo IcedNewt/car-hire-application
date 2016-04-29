@@ -8,7 +8,7 @@ public interface Car {
 	void setCurrentFuel(int currentFuel); 
 	
 	int calculateFuelUsed(); // Calculates the fuel used on the journey.
-	int driveCar(int kilometers);	// Simulates the car being driven, to use fuel.
+	int driveCar(int kilometres);	// Simulates the car being driven, to use fuel.
 	
 	void isTankFull(); // True = tank is full.
 	void isCarRented(); // True = car is rented out.

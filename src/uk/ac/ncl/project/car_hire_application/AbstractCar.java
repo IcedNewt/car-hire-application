@@ -35,7 +35,7 @@ public abstract class AbstractCar implements Car{
 	
 	public int getCurrentFuel(){
 		return currentFuel;
-	}
+	}	
 	
 	public void setCurrentFuel(int currentFuel) {
 		this.currentFuel = currentFuel;
@@ -53,12 +53,39 @@ public abstract class AbstractCar implements Car{
 		return (getMaxFuel() - getCurrentFuel());
 	}
 	
+	public int addFuel(int fuelToAdd){
+		if((getRented()==true)&&(getCurrentFuel()!=getMaxFuel())){ //If the car is not rented AND The tank is not full.
+			int fuelNeeded = (getMaxFuel() - calculateFuelUsed()); // Calculating the fuel needed to fill the tank. (Can be more that the max).
+			
+			if(fuelNeeded > getMaxFuel()){ // If the car has negative fuel, return the max fuel.
+				setCurrentFuel(getMaxFuel());
+				return getMaxFuel();
+			}
+			
+			if(fuelToAdd >= fuelNeeded){ // If the added fuel is more than max fuel, return max fuel.
+				setCurrentFuel(getMaxFuel());
+				return fuelNeeded;
+			}
+			else{ // If the added fuel is valid, return the amount of fuel added.
+				setCurrentFuel(getCurrentFuel()+fuelToAdd);
+				return fuelToAdd;
+			}
+		}
+		return 0; // If the car is full of fuel, return 0.
+	}	
+	
 	public void isTankFull() {
 		if(calculateFuelUsed() == 0){
 			System.out.println("The tank is full.");
 		}
 	}
 
+	public void isCarRented() {
+		if(getRented() == true ){
+			System.out.println("The car is currently being rented.");
+		}
+	}
+	
 	public String toString(){
 		String typeOfCar;
 		if(MAX_FUEL == 65){
@@ -69,11 +96,4 @@ public abstract class AbstractCar implements Car{
 		}
 		return "Registration: "+getCAR_REGISTRATION()+" - Car Type: "+typeOfCar+" - Current Fuel: "+getCurrentFuel()+" - Is Rented? "+getRented()+System.lineSeparator();
 	}
-	
-	public void isCarRented() {
-		if(getRented() == true ){
-			System.out.println("The car is currently being rented.");
-		}
-	}
-
 }

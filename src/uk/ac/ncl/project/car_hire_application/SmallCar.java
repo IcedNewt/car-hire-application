@@ -14,11 +14,20 @@ public class SmallCar extends AbstractCar{
 		return null;
 	}	
 	
-	public int driveCar(int kilometers){
+	public int driveCar(int kilometres){
 		int fuelUsed = 0;
-		fuelUsed = ((int) Math.ceil((double)kilometers/25.0));
+		if(getRented()==false){
+			System.out.println("Car "+getCAR_REGISTRATION()+" has not been rented, no journey is undertaken"+System.lineSeparator());
+			return 0;
+		}
+		if(getCurrentFuel() <= 0){
+			System.out.println("Car "+getCAR_REGISTRATION()+" has no fuel, no journey is undertaken"+System.lineSeparator());
+		}	
+		else{
+		fuelUsed = ((int) Math.ceil((double)kilometres/25.0));
 		setCurrentFuel(getCurrentFuel()-fuelUsed);
-
+		System.out.println("Car "+getCAR_REGISTRATION()+" has undertook a journey of "+kilometres+" kilometres has consumed "+fuelUsed+" litres"+System.lineSeparator());
+		}
 		return fuelUsed;
 	}
 }

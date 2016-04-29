@@ -8,6 +8,10 @@ public class RentalSystem {
 	final static List<Car> smallCars = new ArrayList<Car>();
 	final static List<Car> largeCars = new ArrayList<Car>();
 	
+	public static void output(String string){
+		System.out.println(string);
+	}
+	
 	public static List<Car> determineType(String typeOfCar){
 		if(typeOfCar == "Small"){
 			return smallCars;
@@ -40,11 +44,22 @@ public class RentalSystem {
 		return rentedCars;
 	}
 	
-	public Car getCar(DrivingLicence drivingLicence){
+	public static Car getCar(DrivingLicence drivingLicence){
 		if(rentedCars.containsKey(drivingLicence)){
 			return rentedCars.get(drivingLicence);
 		}
 		return null;
+	}
+	
+	// If used, ensures that driveCar() is not called on null objects (The specification requires driveCar() to be public, I believe this to be an oversight, 
+	// it would be preferable to make it private and force driveCar() to be called through this method, thus eliminating the risk of a null pointer error).
+	public static void attemptToDrive(DrivingLicence drivingLicence,int kilometres){
+		if(getCar(drivingLicence)!=null){
+			getCar(drivingLicence).driveCar(kilometres);
+		}
+		else{
+			output(drivingLicence+" = HAS NO CAR ISSUED TO THEM"+System.lineSeparator());
+		}
 	}
 	
 	public static String issueCar(DrivingLicence drivingLicence, String typeOfCar){
@@ -77,7 +92,7 @@ public class RentalSystem {
 		}
 		
 		if(typeOfCar == "Large"){
-			if((licenceAge < 25) || (licenceAge<5)){
+			if((userAge < 25) || (licenceAge<5)){
 				return invalid;
 			}
 		}
@@ -104,11 +119,23 @@ public class RentalSystem {
 		
 	}	
 	
-	public void terminateRental(DrivingLicence drivingLicence){
+	public static int terminateRental(DrivingLicence drivingLicence){
 		if(rentedCars.containsKey(drivingLicence)){
-			rentedCars.get(drivingLicence);
+			rentedCars.get(drivingLicence).setRented(false);
+			int fuelUsed = rentedCars.get(drivingLicence).calculateFuelUsed();
+			int maxFuel = rentedCars.get(drivingLicence).getMaxFuel();
+			int fuelNeeded = (maxFuel - fuelUsed);
+			rentedCars.get(drivingLicence).setCurrentFuel(rentedCars.get(drivingLicence).getMaxFuel());
+			if(fuelNeeded < 0){
+				output(drivingLicence+" = CAR RENTAL HAS BEEN TERMINATED = "+rentedCars.get(drivingLicence)+" = THE FUEL REQUIRE TO FILL UP THE TANK IS: "+maxFuel+" LITRES"+System.lineSeparator());
+				rentedCars.remove(drivingLicence);
+				return maxFuel;
+			}
+			output(drivingLicence+" = CAR RENTAL HAS BEEN TERMINATED = "+rentedCars.get(drivingLicence)+" = THE FUEL REQUIRE TO FILL UP THE TANK IS: "+(maxFuel - fuelNeeded)+" LITRES"+System.lineSeparator());
 			rentedCars.remove(drivingLicence);
+			return maxFuel - fuelNeeded;
 		}
+		return -1;
 	}
 	
 	public static DrivingLicence createDrivingLicence(String firstName, String lastName, int yearOfBirth, 
@@ -122,6 +149,7 @@ public class RentalSystem {
 		return DrivingLicence.createInstance(firstName, lastName, dateOfBirth, dateOfIssue, isFullLicence);
 		
 	}
+	
 	
 	public static void createCarFleet (int numberOfSmall, int numberOfLarge){
 		while(CarRegistration.getREGISTRATION_NUMBERS().size()!=numberOfSmall){
