@@ -105,7 +105,10 @@ public class RentalSystem {
 	}	
 	
 	public void terminateRental(DrivingLicence drivingLicence){
-		
+		if(rentedCars.containsKey(drivingLicence)){
+			rentedCars.get(drivingLicence);
+			rentedCars.remove(drivingLicence);
+		}
 	}
 	
 	public static DrivingLicence createDrivingLicence(String firstName, String lastName, int yearOfBirth, 
