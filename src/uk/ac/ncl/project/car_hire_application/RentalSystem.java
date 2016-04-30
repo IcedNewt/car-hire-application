@@ -64,6 +64,7 @@ public class RentalSystem implements RentalSystemInterface {
 		}
 	}
 	
+	// Assigns a car to a driving licence.
 	public  String issueCar(DrivingLicence drivingLicence, String typeOfCar){
 		List<Car> listOfTypeOfCar = determineType(typeOfCar);
 		
@@ -73,7 +74,7 @@ public class RentalSystem implements RentalSystemInterface {
 		dateOfBirth.setTime(drivingLicence.getDateOfBirth());
 		
 		Calendar today = Calendar.getInstance();
-		today.add(Calendar.MONTH, 1); //Issue with calandar, the month created is out by one, 1 must be added to the month to make it the current time/date.
+		today.add(Calendar.MONTH, 1); // Issue with calandar, the month created is out by one, 1 must be added to the month to make it the current time/date.
 		
 		// Calculates the age of the user.
 		int userAge = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR);
