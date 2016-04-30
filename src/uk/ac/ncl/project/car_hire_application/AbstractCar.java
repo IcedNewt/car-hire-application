@@ -8,6 +8,7 @@ public abstract class AbstractCar implements Car{
 	private boolean rented;
 	
 	
+	// Constructor, protected so that it can only be called via the subclass factory method, not globally.
 	protected AbstractCar(int maxFuel, String carRegistration){
 		this.CAR_REGISTRATION = carRegistration;
 		this.MAX_FUEL = maxFuel;
@@ -15,6 +16,7 @@ public abstract class AbstractCar implements Car{
 		this.rented = false;
 	}
 	
+	// A method to ensure that a NullPointerException does not cause the program to crash.
 	protected static String createCarRegistration(){
 		String temp;
 		try{
@@ -37,6 +39,10 @@ public abstract class AbstractCar implements Car{
 		return currentFuel;
 	}	
 	
+	public boolean getRented(){
+		return rented;
+	}
+		
 	public void setCurrentFuel(int currentFuel) {
 		this.currentFuel = currentFuel;
 	}
@@ -45,16 +51,14 @@ public abstract class AbstractCar implements Car{
 		this.rented = rented;
 	}
 	
-	public boolean getRented(){
-		return rented;
-	}
-	
+	// Calculates the fuel that has been used after driving the car.
 	public int calculateFuelUsed(){
 		return (getMaxFuel() - getCurrentFuel());
 	}
 	
+	// Method that adds a passed integer to the fuel tank, up to its maximum.
 	public int addFuel(int fuelToAdd){
-		if((getRented()==true)&&(getCurrentFuel()!=getMaxFuel())){ //If the car is not rented AND The tank is not full.
+		if((getRented()==true)&&(getCurrentFuel()!=getMaxFuel())){ //If the car is NOT rented AND The tank is full, return 0.
 			int fuelNeeded = (getMaxFuel() - calculateFuelUsed()); // Calculating the fuel needed to fill the tank. (Can be more that the max).
 			
 			if(fuelNeeded > getMaxFuel()){ // If the car has negative fuel, return the max fuel.
@@ -74,20 +78,35 @@ public abstract class AbstractCar implements Car{
 		return 0; // If the car is full of fuel, return 0.
 	}	
 	
+	// Indicates whether the car's fuel tank is full or not
 	public void isTankFull() {
 		if(calculateFuelUsed() == 0){
-			System.out.println("The tank is full.");
+			output("The tank is currently full.");
 		}
-	}
-
+		else{
+			output("The tank is currently NOT full.");
+		}
+	}	
+	
+	// Indicates whether the car is rented or not
 	public void isCarRented() {
 		if(getRented() == true ){
-			System.out.println("The car is currently being rented.");
+			output("The car is currently being rented.");
+		}
+		else{
+			output("The car is NOT currently being rented.");
 		}
 	}
 	
+	// Removes duplication of System.out.println().
+	public static void output(String string){
+		System.out.println(string);
+	}
+	
+	// Overrides the toString class for any Car objects.
 	public String toString(){
 		String typeOfCar;
+		// Determines the type of car from the MAX_FUEL of the object.
 		if(MAX_FUEL == 65){
 			typeOfCar = "Large";
 		}

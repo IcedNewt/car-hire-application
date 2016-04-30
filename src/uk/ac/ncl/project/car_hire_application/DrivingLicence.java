@@ -1,4 +1,5 @@
 package uk.ac.ncl.project.car_hire_application;
+
 import java.util.*;
 
 public final class DrivingLicence {
@@ -19,12 +20,13 @@ public final class DrivingLicence {
 		this.IS_FULL_LICENCE = isFullLicence;
 		}
 		
-		public final static DrivingLicence createInstance(String firstName, String lastName, Calendar dateOfBirth, Calendar dateOfIssue, boolean isFullLicence) {
+		// Static factory method for creating a DrivingLicence object.
+		protected final static DrivingLicence createInstance(String firstName, String lastName, Calendar dateOfBirth, Calendar dateOfIssue, boolean isFullLicence) {
 			String yearOfIssue = String.valueOf(dateOfIssue.get(Calendar.YEAR));
 			String i;
 			
 			do{
-				i = String.valueOf((int)(Math.random()*100)+1);
+				i = String.valueOf((int)(Math.random()*9)+1)+String.valueOf((int)(Math.random()*9)+1);
 			}while(LICENCES.containsKey(i));
 			
 			String licenceNumber = String.valueOf(firstName.charAt(0)) + String.valueOf(lastName.charAt(0))+"-"+yearOfIssue+"-"+i;
@@ -34,6 +36,7 @@ public final class DrivingLicence {
 			return newLicence;
 		}
 		
+		// Overrides the toString() for DrivingLicence objects.
 		public String toString(){
 			return "Name: "+FIRSTNAME+" "+LASTNAME+" - Licence Number: "+LICENCE_NUMBER;
 			

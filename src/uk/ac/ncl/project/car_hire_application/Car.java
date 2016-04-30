@@ -14,7 +14,8 @@ public interface Car {
 	void isCarRented(); // True = car is rented out.
 
 	String getCAR_REGISTRATION();
+	int addFuel(int fuelToAdd); // Calculates the fuel needed to fill the tank.
 
-	void setRented(boolean b);
-	
+	void setRented(boolean b); 
+	boolean getRented();
 }
