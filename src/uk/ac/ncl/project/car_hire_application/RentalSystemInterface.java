@@ -15,11 +15,14 @@ public interface RentalSystemInterface {
 	
 	String issueCar(DrivingLicence drivingLicence, String typeOfCar); // Issues a car to a driving licence.	
 	
-	void terminateRental(DrivingLicence drivingLicence); // Terminates the rental of a car, which is assigned to a driving licence.
+	int terminateRental(DrivingLicence drivingLicence); // Terminates the rental of a car, which is assigned to a driving licence.
 	
 	DrivingLicence createDrivingLicence(String firstName, String lastName, int yearOfBirth, int monthOfBirth, 
 	int dayOfBirth, int yearOfIssue, int monthOfIssue, int dayOfIssue, boolean isFullLicence); // Creates the Calendar objects for a DrivingLicence object, 																			   // and calls the method to create the object.
 	
 	void createCarFleet (int numberOfSmall, int numberOfLarge); // Creates a set number of LargeCar and SmallCar objects for the rental system.
+
+	Object getSmallcars();
+	Object getLargecars();
 		
 }

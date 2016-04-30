@@ -2,11 +2,21 @@ package uk.ac.ncl.project.car_hire_application;
 
 import java.util.*;
 
-public class RentalSystem {	
+public class RentalSystem implements RentalSystemInterface {	
 	
-	static Map<DrivingLicence, Car> rentedCars = new HashMap<DrivingLicence, Car>(); // HashMap holds all the cars that are currently rented out.
+	private static Map<DrivingLicence, Car> rentedCars = new HashMap<DrivingLicence, Car>(); // HashMap holds all the cars that are currently rented out.
 	final private static List<Car> SMALLCARS = new ArrayList<Car>(); // ArrayList that holds cars of type SMALL.
 	final private static List<Car> LARGECARS = new ArrayList<Car>(); // ArrayList that holds cars of type LARGE.
+	
+	private static final RentalSystem INSTANCE = new RentalSystem();
+	
+	private RentalSystem(){
+		createCarFleet(20,10);
+	}
+	
+	public static RentalSystem getInstance(){
+		return INSTANCE;
+	}
 	
 	// Removes duplication of System.out.println().
 	public static void output(String string){
@@ -14,7 +24,7 @@ public class RentalSystem {
 	}
 	
 	// Determines what type of car is being requested, and if the type is valid.
-	public static List<Car> determineType(String typeOfCar){
+	public  List<Car> determineType(String typeOfCar){
 		if(typeOfCar == "Small"){
 			return getSmallcars();
 		}
@@ -25,7 +35,7 @@ public class RentalSystem {
 	}
 	
 	// Returns the number of available cars, of the passed type.
-	public static String availableCars(String typeOfCar){
+	public String availableCars(String typeOfCar){
 		List<Car> listOfTypeOfCar = determineType(typeOfCar);
 
 		if (listOfTypeOfCar == null){
@@ -45,7 +55,7 @@ public class RentalSystem {
 	
 	// If used, ensures that driveCar() is not called on null objects (The specification requires driveCar() to be public, I believe this to be an oversight, 
 	// it would be preferable to make it private and force driveCar() to be called through this method, thus eliminating the risk of a null pointer error).
-	public static void attemptToDrive(DrivingLicence drivingLicence,int kilometres){
+	public void attemptToDrive(DrivingLicence drivingLicence,int kilometres){
 		if(getCar(drivingLicence)!=null){
 			getCar(drivingLicence).driveCar(kilometres);
 		}
@@ -54,7 +64,7 @@ public class RentalSystem {
 		}
 	}
 	
-	public static String issueCar(DrivingLicence drivingLicence, String typeOfCar){
+	public  String issueCar(DrivingLicence drivingLicence, String typeOfCar){
 		List<Car> listOfTypeOfCar = determineType(typeOfCar);
 		
 		String invalid = drivingLicence+" = CANNOT BE ISSUED A CAR "+System.lineSeparator(); // Message if the driving licence cannot be assigned a car.
@@ -130,7 +140,7 @@ public class RentalSystem {
 	}	
 	
 	// Method which terminates the rental of a car.
-	public static int terminateRental(DrivingLicence drivingLicence){
+	public int terminateRental(DrivingLicence drivingLicence){
 		if(rentedCars.containsKey(drivingLicence)){
 			rentedCars.get(drivingLicence).setRented(false);
 			int fuelUsed = rentedCars.get(drivingLicence).calculateFuelUsed(); // fuelUsed = the fuel used by the car.
@@ -151,8 +161,7 @@ public class RentalSystem {
 	}
 	
 	// Creates the Calendar objects for the driving licence, then calls the correct factory method in the DrivingLicence class.
-	public static DrivingLicence createDrivingLicence(String firstName, String lastName, int yearOfBirth, 
-	int monthOfBirth, int dayOfBirth, int yearOfIssue, int monthOfIssue, int dayOfIssue, boolean isFullLicence){
+	public DrivingLicence createDrivingLicence(String firstName, String lastName, int yearOfBirth, int monthOfBirth, int dayOfBirth, int yearOfIssue, int monthOfIssue, int dayOfIssue, boolean isFullLicence){
 		Calendar dateOfBirth = Calendar.getInstance();
 		dateOfBirth.set(yearOfBirth,monthOfBirth,dayOfBirth);
 		
@@ -165,7 +174,7 @@ public class RentalSystem {
 	}
 	
 	// Creates all required car objects and stores them in the correct collection: SMALLCARS/LARGECARS .
-	public static void createCarFleet (int numberOfSmall, int numberOfLarge){
+	public void createCarFleet (int numberOfSmall, int numberOfLarge){
 		// For loop that ensures that the correct number of objects are stored.
 		while(CarRegistration.getREGISTRATION_NUMBERS().size()!=numberOfSmall){
 			Car temp = SmallCar.createSmallCar();
@@ -180,11 +189,11 @@ public class RentalSystem {
 		}
 	}
 
-	public static List<Car> getSmallcars() {
+	public List<Car> getSmallcars() {
 		return SMALLCARS;
 	}
 
-	public static List<Car> getLargecars() {
+	public List<Car> getLargecars() {
 		return LARGECARS;
 	}
 	
@@ -193,7 +202,7 @@ public class RentalSystem {
 	}
 	
 	// Returns the car assigned to a driving licence, if there is none, then it returns null.
-	public static Car getCar(DrivingLicence drivingLicence){
+	public Car getCar(DrivingLicence drivingLicence){
 		if(rentedCars.containsKey(drivingLicence)){
 			return rentedCars.get(drivingLicence);
 		}
