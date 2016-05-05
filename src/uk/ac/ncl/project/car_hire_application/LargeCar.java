@@ -31,12 +31,12 @@ public class LargeCar extends AbstractCar {
 			fuelUsed = ((int) Math.ceil((double)kilometres/15));
 		}
 		else{
-			kilometres -= 50;
+			int kilometresNew =kilometres- 50;
 			fuelUsed = 4;
-			fuelUsed += ((int) Math.ceil((double)kilometres/20));
+			fuelUsed += ((int) Math.ceil((double)kilometresNew/20));
 		}
 		setCurrentFuel(getCurrentFuel()-fuelUsed);
-		output("The journey of "+kilometres+" kilometres has consumed "+fuelUsed+" litres"+System.lineSeparator());
+		output("Car "+getCAR_REGISTRATION()+" has undertook a journey of "+kilometres+" kilometres, which has consumed "+fuelUsed+" litres"+System.lineSeparator());
 		}
 		return fuelUsed;
 	}

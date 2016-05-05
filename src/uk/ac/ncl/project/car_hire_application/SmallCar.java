@@ -29,7 +29,7 @@ public class SmallCar extends AbstractCar{
 		else{
 		fuelUsed = ((int) Math.ceil((double)kilometres/25.0));
 		setCurrentFuel(getCurrentFuel()-fuelUsed);
-		output("Car "+getCAR_REGISTRATION()+" has undertook a journey of "+kilometres+" kilometres has consumed "+fuelUsed+" litres"+System.lineSeparator());
+		output("Car "+getCAR_REGISTRATION()+" has undertook a journey of "+kilometres+" kilometres, which has consumed "+fuelUsed+" litres"+System.lineSeparator());
 		}
 		return fuelUsed;
 	}
