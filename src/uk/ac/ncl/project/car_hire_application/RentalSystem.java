@@ -146,7 +146,7 @@ public class RentalSystem implements RentalSystemInterface {
 			rentedCars.get(drivingLicence).setRented(false);
 			int fuelUsed = rentedCars.get(drivingLicence).calculateFuelUsed(); // fuelUsed = the fuel used by the car.
 			int maxFuel = rentedCars.get(drivingLicence).getMaxFuel(); // maxFuel = the max amount of fuel the car can hold.
-			int fuelNeeded = (maxFuel - (maxFuel - fuelUsed)); // Calculate the fuelNeeded to fill the tank.
+			int fuelNeeded = (maxFuel - fuelUsed); // Calculate the fuelNeeded to fill the tank.
 			rentedCars.get(drivingLicence).setCurrentFuel(rentedCars.get(drivingLicence).getMaxFuel());
 			if(fuelNeeded < 0){ // If the car has used more fuel that the max, return the amount of fuel to fill tank from 0, not the negative number.
 				output(drivingLicence+" = CAR RENTAL HAS BEEN TERMINATED = "+rentedCars.get(drivingLicence)+" = THE FUEL REQUIRE TO FILL UP THE TANK IS: "+maxFuel+" LITRES"+System.lineSeparator());
@@ -156,7 +156,7 @@ public class RentalSystem implements RentalSystemInterface {
 			// Return the amount of fuel needed to fill the tank after being driven.
 			output(drivingLicence+" = CAR RENTAL HAS BEEN TERMINATED = "+rentedCars.get(drivingLicence)+" = THE FUEL REQUIRE TO FILL UP THE TANK IS: "+(maxFuel - fuelNeeded)+" LITRES"+System.lineSeparator());
 			rentedCars.remove(drivingLicence);
-			return fuelNeeded;
+			return (maxFuel - fuelNeeded);
 		}
 		return -1; // Returns -1 if the car has not been rented.
 	}
